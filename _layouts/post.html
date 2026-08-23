@@ -29,8 +29,22 @@ layout: default
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
 
-<!-- Mermaid diagram support: renders ```mermaid code blocks as diagrams -->
+<!-- Mermaid diagram support -->
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  // Kramdown renders ```mermaid fences as <pre><code class="language-mermaid">,
+  // but Mermaid.js only auto-renders elements with class="mermaid".
+  // Convert each matching code block into the format Mermaid expects.
+  document.querySelectorAll('pre > code.language-mermaid').forEach((codeEl) => {
+    const pre = codeEl.parentElement;
+    const graphDefinition = codeEl.textContent;
+    const container = document.createElement('div');
+    container.className = 'mermaid';
+    container.textContent = graphDefinition;
+    pre.replaceWith(container);
+  });
+
   mermaid.initialize({ startOnLoad: true, theme: 'default' });
+  mermaid.run();
 </script>
