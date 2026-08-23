@@ -1,3 +1,8 @@
 title: Yanbin Liu
 description: Notes on AI, enterprise tooling, and solution design
 linkedin_username: yanbin-liu-18636644   # e.g. from linkedin.com/in/your-linkedin-handle
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
